@@ -1,0 +1,46 @@
+/*
+You are in an infinite 2D grid where you can move in any of the 8 directions
+
+ (x,y) to 
+    (x+1, y), 
+    (x - 1, y), 
+    (x, y+1), 
+    (x, y-1), 
+    (x-1, y-1), 
+    (x+1,y+1), 
+    (x-1,y+1), 
+    (x+1,y-1) 
+    
+You are given a sequence of points and the order in which you need to cover the points..
+Give the minimum number of steps in which you can achieve it. You start from the first point.
+
+input:
+ A = [0, 1, 1]
+ B = [0, 1, 2]
+ 
+ output:
+  2
+*/
+
+
+/*
+solution approach
+
+1. make one coordinate to zero(axis shift) makes us independent of sign
+2. move diagonaly
+3. move horizontal/vertical remaining remaining
+
+*/
+int Solution::coverPoints(vector<int> &A, vector<int> &B) {
+    int x1,x2,steps = 0,y1,y2;
+    x1 = A[0];
+    y1 = B[0];
+    for(int i=1;i<A.size();i++){
+        x2 = A[i]-x1;
+        y2 = B[i]-y1;
+        steps += min(abs(x2),abs(y2)) + abs(abs(x2) - abs(y2));
+        x1 = A[i];
+        y1 = B[i];
+    }
+    return steps;
+}
