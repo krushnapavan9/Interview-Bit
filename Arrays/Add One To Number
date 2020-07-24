@@ -1,0 +1,41 @@
+/*
+Given a non-negative number represented as an array of digits,
+add 1 to the number ( increment the number represented by the digits ).
+The digits are stored such that the most significant digit is at the head of the list.
+
+Example:
+If the vector has [1, 2, 3]
+the returned vector should be [1, 2, 4]
+as 123 + 1 = 124.
+
+*/
+/*
+Solution approach:
+
+1. remove leading zeros
+2. add 1 to the last index 
+  if it is greater than 9 take carry and put val+1-10 in array
+  else carry = 0
+*/
+vector<int> Solution::plusOne(vector<int> &A) {
+    for(int i=0;i<A.size();){
+        if(A[i] == 0)
+            A.erase(A.begin());
+        else
+            break;
+    }
+    int carry = 1;
+    for(int i=A.size()-1;i>=0;i--){
+        A[i] = A[i]+carry;
+        if(A[i]>9){
+            A[i] = A[i]-9;
+            carry = 1;
+        }
+        else{
+            carry = 0;
+        }
+    }
+    if(carry==1)
+        A.insert(A.begin(),1);
+    return A;
+}
